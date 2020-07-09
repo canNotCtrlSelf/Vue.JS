@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络应用-天气查询</title>
+</head>
+
+<body>
+    <div id="app" style="width: 750px;margin: 0 auto;text-align: center;font-size: 16px;">
+        <h2>在线查询天气</h2>
+        <div>
+            <input type="text" v-model="city" @keyup.enter="searchWeather" placeholder="请输入城市，按回车查询。" size="33">
+        </div>
+        <div style="font-size: 14px;">
+            <b>热门城市：</b>
+            <span @click="changeCity('成都')">成都</span>&nbsp;&nbsp;&nbsp;
+            <span @click="changeCity('德阳')">德阳</span>&nbsp;&nbsp;&nbsp;
+            <span @click="changeCity('江油')">江油</span>&nbsp;&nbsp;&nbsp;
+            <span @click="changeCity('绵阳')">绵阳</span>&nbsp;&nbsp;&nbsp;
+        </div>
+        <div v-show="weatherList.length!=0" v-for="item in weatherList" style="width: 150px;text-align: center;float: left;font-size: 12px;">
+            <h3>{{item.type}} </h3>
+            <div>{{item.low}} ~ {{item.high}} </div>
+            <div>{{item.date}} </div>
+            <div>{{item.fengxiang}}{{item.fengli}} </div>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+    <!-- axios CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

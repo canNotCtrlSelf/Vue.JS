@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="添加水果" @click="add">
+        <input type="button" value="移除水果" @click="remove">
+        <ul>
+            <li v-for="(item,index) in arr">
+                {{item}}
+            </li>
+            <p v-for="(item,index) in fruit" v-bind:title="title+'?'">
+                {{index+1}}&nbsp;&nbsp;&nbsp;{{item.name}}
+            </p>
+        </ul>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                title: "是不是你最爱的水果",
+                arr: [1, 2, 3, 4, 5],
+                fruit: [
+                    { name: "苹果" },
+                    { name: "凤梨" },
+                    { name: "桃子" },
+                    { name: "橘子" }
+                ]
+            },
+            methods: {
+                add: function () {
+                    this.fruit.push({ name: "柠檬" });
+                },
+                remove: function () {
+                    this.fruit.shift();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

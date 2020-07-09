@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data数据对象</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+        <h3>{{person}} </h3>
+        <h3>{{person.name}} {{person.age}} </h3>
+        <ul>
+            <li>{{fruit[0]}} </li>
+            <li>{{fruit[1]}} </li>
+            <li>{{fruit[2]}} </li>
+            <li>{{fruit[3]}} </li>
+            <li>{{fruit[4]}} </li>
+
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "hello vue!",
+                person:{
+                    name:"张三",
+                    age:18
+                },
+                fruit:["香蕉","苹果","蓝莓","葡萄","李子"]
+            }
+        })
+    </script>
+</body>
+
+</html>

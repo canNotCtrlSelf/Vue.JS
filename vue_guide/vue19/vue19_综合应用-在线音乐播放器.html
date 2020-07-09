@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线音乐播放器</title>
+    <style>
+        .line {
+            width: 33%;
+            height: 500px;
+            float: left;
+        }
+
+        .panel {
+            width: 840px;
+            height: 616px;
+            font-size: 14px;
+            background-color: antiquewhite;
+            margin: 50px auto;
+            text-align: center;
+
+        }
+
+        .music:hover {
+            cursor: pointer;
+            background-color: bisque;
+        }
+
+        .mask {
+            background-color: #000;
+            opacity: 0.5;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        /************************************************* 页面滚动条样式 begin */
+        /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+        ::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+            background-color: #F5F5F5;
+        }
+
+        /*定义滚动条轨道 内阴影+圆角*/
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        /*定义滑块 内阴影+圆角*/
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: #555;
+        }
+
+        /************************************************* 页面滚动条样式 end */
+
+        /**************************** 歌曲列表、评论滚动条样式 begin **********************/
+        .cus-scrollbar {
+            overflow-y: auto;
+        }
+
+        .cus-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            /*height: 4px;*/
+        }
+
+        .cus-scrollbar::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .cus-scrollbar::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 0;
+            background: rgba(0, 0, 0, 0.1);
+
+        }
+
+        /**************************** 歌曲列表、评论滚动条样式 end **********************/
+    </style>
+</head>
+
+<body>
+    <div id="player" class="panel">
+        <h2>在线音乐播放器</h2>
+        <!-- 歌曲搜索 -->
+        <input style="margin-bottom: 10px;" v-model="query" type="text" @keyup.enter="searchMusic"><br>
+        <div v-show="musicList.length!=0">
+            <!-- 搜索结果列表 -->
+            <div class="line cus-scrollbar" style="text-align: left;">
+                <div v-for="item in musicList" class="music">
+                    <span @click="playMusic(item.id,item.name)">
+                        <img src="./img/musicPlay.png" style="width: 10px;height: 10px;">
+                        {{item.name}}
+                    </span>
+                    <img v-show="item.mvid!=0" @click="playMV(item.mvid)" src="./img/videoPlay.png"
+                        style="width: 10px;height: 10px;float: right;">
+                </div>
+            </div>
+            <!-- 歌曲封面及播放按钮 -->
+            <div class="line">
+                <div style="border: 3px solid lightblue;width: 180px;height: 180px;margin: 0 auto;">
+                    <img :src="picUrl" width="100%" height="100%">
+                </div>
+                <h4>{{musicName}} </h4>
+            </div>
+            <!-- 热评列表 -->
+            <div class="line cus-scrollbar">
+                <div style="font-weight: 700;">热门评论</div>
+                <div v-for="item in hotComments">
+                    <div
+                        style="width: 273px;height: 100px;margin-top: 5px;margin-bottom: 5px;border-top: 1px solid lightgray;">
+                        <div style="float: left;width: 40px;height: 40px;margin:25px 5px 25px 5px">
+                            <img :src="item.user.avatarUrl" style="border-radius: 40px;" width="100%" height="100%">
+                        </div>
+                        <div
+                            style="float:left;width: 223px;height: 97px;overflow: hidden;font-size: 12px;text-align: left;line-height: 14px;margin-top: 5px;">
+                            <span style="font-weight: 700; color: blue;">{{item.user.nickname}}: </span>
+                            <span>{{item.content}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div style="clear:left"></div> -->
+            <audio v-bind:src="musicUrl" ref="audio" autoplay="false" controls loop
+                style="width: 840px;height: 40px;"></audio>
+        </div>
+        <!-- mv播放器 -->
+        <div id="" v-if="isShow"
+            style="position: absolute;left: 22.5%;top:10px;width: 838px;height: 500px;border: 1px solid red;z-index: 100;">
+            <video :src="mvUrl" controls style="width:100%;height: 100%;"></video>
+        </div>
+    </div>
+    <!-- mv播放器遮罩 -->
+    <div :class="{mask:isShow}" @click="showMask()" style="">
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+    <!-- axios CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

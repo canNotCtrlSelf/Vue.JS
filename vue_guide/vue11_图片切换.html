@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片切换</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="mask">
+        <img :src="imgArr[index]" :title="imgTitle">
+        <br>
+        <input type="button" value="上一张" @click="prev" v-show="index!=0">
+        <input type="button" value="下一张" @click="next" v-show="index<9">
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#mask",
+            data: {
+                imgTitle: "你的武器",
+                imgArr: [
+                    "./img/demo-changePic/宝刀.png",
+                    "./img/demo-changePic/锤子.png",
+                    "./img/demo-changePic/刀-刀架.png",
+                    "./img/demo-changePic/飞弹.png",
+                    "./img/demo-changePic/弓箭.png",
+                    "./img/demo-changePic/计时炸弹.png",
+                    "./img/demo-changePic/枪械-ak.png",
+                    "./img/demo-changePic/手枪.png",
+                    "./img/demo-changePic/双截棍.png",
+                    "./img/demo-changePic/原子弹.png"
+                ],
+                index: 0
+            },
+            methods: {
+                prev: function () {
+                    this.index--;
+                },
+                next: function () {
+                    this.index++;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

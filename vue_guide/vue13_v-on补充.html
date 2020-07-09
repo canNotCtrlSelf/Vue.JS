@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for指令</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 函数参数的使用 -->
+        <input type="button" value="点我" @click="doIt(555,'你好啊')">
+        <!-- 事件修饰符的使用 -->
+        <input type="text" @keyup.enter="sayHi">
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                content: ""
+            },
+            methods: {
+                doIt: function (p1, p2) {
+                    console.log(p1 + p2);
+                },
+                sayHi: function () {
+                    alert("你好啊");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

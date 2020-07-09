@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind指令</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+    <style>
+        .active{
+            border: 1px red solid;
+        }
+        img{
+            border: 1px white solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <img v-bind:src="imgSrc" alt="rainbow">
+        <hr>
+        <!-- 三目运算符 -->
+        <img :src="imgSrc" :class="isActive?'active':''" @click="toggleIsActive"  
+        :title="imgTitle" alt="rainbow">
+        <hr>
+        <!-- ....... -->
+        <img :src="imgSrc" :class="{active:isActive}" @click="toggleIsActive"  
+        :title="imgTitle" alt="rainbow">
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                imgSrc:"https://s1.ax1x.com/2020/06/22/NJ2nld.png",
+                imgTitle:"彩虹,你值得看见!",
+                isActive:false
+            },
+            methods: {
+                toggleIsActive:function(){
+                    this.isActive = !this.isActive;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

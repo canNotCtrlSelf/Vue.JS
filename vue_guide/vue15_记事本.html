@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记事本</title>
+</head>
+
+<body>
+    <div id="app" style="font-size:14px;width: 240px;">
+        <h3 style="text-align: center;">遗忘记事本</h3>
+        <input type="text" v-model="note" @keyup.enter="add" style="width: 100%;">
+        <div v-for="(item,index) in list">
+            <div style="float: left;">
+                {{index+1}}  {{item}}
+            </div>
+            <div style="float: right;" @click="remove(index)">x</div>
+            <div style="clear: both;"></div>
+        </div>
+        <div v-show="list.length!=0">
+            <div style="float: left;">
+                {{list.length}} items left
+            </div>
+            <div style="float: right;" @click="clear">
+                clear
+            </div>
+        </div>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="./js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                list: ["好好学习", "天气很好", "有微风"],
+                note: "狗吠不止"
+            },
+            methods: {
+                add: function () {
+                    this.list.push(this.note);
+                },
+                remove: function (start) {
+                    this.list.splice(start,1);
+                },
+                clear:function(){
+                    this.list = [];
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
