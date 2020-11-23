@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>父向子通信</title>
+    </head>
+    <body>
+        <div id="app">
+            <hello :items="items"></hello>
+        </div>
+
+    </body>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        const hello = {
+            template: '<ul><li v-for="(item,index) in items" >第{{index+1}}个按钮是：{{item}}</li><br></ul>',
+            props: {
+                num1: {
+                    type: Number,
+                    default: 0,
+                    required: true
+                },
+                items:{
+                    type: Array,
+                    default: [],
+                    required: true
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                // num: "abc"
+                num: "123",
+                items:["变大","变小","变长"]
+            },
+            components: {
+                // hello1: hello //组件名的key和value一样时，可只写一个
+                hello
+            }
+        })
+    </script>
+</html>

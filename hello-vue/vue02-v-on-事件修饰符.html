@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-on</title>
+    </head>
+    <body>
+        <div id="app">
+            <input type="button" v-on:contextmenu.stop="num++" value="增加">{{num}}
+            <input type="button" v-on:contextmenu.prevent.once="num++" value="增加">{{num}}
+            <input type="button" v-on:contextmenu.once="decrement()" value="减少">
+        </div>
+    </body>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+        var app=new Vue({
+            el:"#app",
+            data:{
+                num:100
+            },
+            methods:{
+                decrement(){
+                    this.num--;
+                }
+            }
+        })
+    </script>
+</html>

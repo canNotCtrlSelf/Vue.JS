@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>v-on</title>
+    </head>
+    <body>
+        <div id="app" @keyup.ctrl.alt.67="clear">
+            <input type="text" maxlength="12" v-model="message" >
+            <input type="button" @click="clear" value="clear">
+        </div>
+    </body>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "123"
+            },
+            methods: {
+                clear() {
+                    this.message = ""
+                }
+            }
+        })
+    </script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>组件路由</title>
+    </head>
+    <body>
+        <div id="app">
+            <span><router-link to="/login">登录</router-link></span>&emsp;
+            <span><router-link to="/register">注册</router-link></span>
+            <hr>
+            <router-view></router-view>
+        </div>
+    </body>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+    <script src="user/loginForm.js"></script>
+    <script src="user/registerForm.js"></script>
+    <script>
+        const router = new VueRouter({
+            routes: [
+                {
+                    path:"/login",
+                    component:loginForm
+                }, {
+                    path: "/register",
+                    component: registerForm
+                }
+            ]
+        })
+
+        const app = new Vue({
+            el: "#app",
+            router //引入上面定义的router对象 ，可以省略在component中注册的路由组件
+        })
+    </script>
+</html>

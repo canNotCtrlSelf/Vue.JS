@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>子向父通信</title>
+    </head>
+    <body>
+        <div id="app">
+            <hello :num1="num" @incres1="incres()"></hello>
+        </div>
+
+    </body>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        const hello = {
+            template: '<button @click="subIncre()">点击+1，现在是：{{num1}}</button>',
+            props: {
+                num1: {
+                    type: Number,
+                    default: 0,
+                    required: true
+                },
+            },
+            methods: {
+                subIncre(){
+                    this.$emit("incres1");
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                // num: "abc"
+                num: 0,
+            },
+            components: {
+                // hello1: hello //组件名的key和value一样时，可只写一个
+                hello
+            },
+            methods:{
+                incres(){
+                    this.num++
+                }
+            }
+        })
+    </script>
+</html>

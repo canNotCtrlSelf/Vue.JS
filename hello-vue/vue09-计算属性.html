@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>计算属性</title>
+    </head>
+    <body>
+        <div id="app">
+            <!--生日（毫秒值）：{{new Date(birthday).getFullYear()+"年"+new Date(birthday).getMonth()+"月"+new
+            Date(birthday).getDay()+"日"}}<br>-->
+
+            <!--生日（毫秒值）：{{birth()}}<br>-->
+
+            生日（毫秒值）：{{birth1}}<br>
+
+        </div>
+    </body>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                birthday: 1529032123201 // 毫秒值
+            },
+            methods: {
+                birth() {
+                    return new Date(this.birthday).getFullYear() + "年" + new Date(this.birthday).getMonth() + "月" + new Date(this.birthday).getDay() + "日"
+                }
+            },
+            computed: {
+                birth1(){
+                    const d = new Date(this.birthday);
+                    return d.getFullYear() + "年" + d.getMonth() + "月" + d.getDay() + "日"
+                }
+            }
+        })
+    </script>
+</html>

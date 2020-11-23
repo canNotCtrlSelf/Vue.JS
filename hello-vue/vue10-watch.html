@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>watch</title>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="search">
+        </div>
+    </body>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                search:""
+            },
+            watch:{
+                search(newVal,oldVal){
+                    console.log(newVal,oldVal);
+                }
+            }
+        })
+    </script>
+</html>
